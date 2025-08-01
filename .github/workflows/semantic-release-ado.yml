@@ -1,4 +1,4 @@
-name: Semantic Release with ADO Integration
+name: Semantic Release - Azure DevOps
 
 on:
   push:
