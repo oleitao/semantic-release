@@ -450,4 +450,3 @@ jobs:
 ```
 
 This example shows how you can use semantic-release in GitHub Actions while still leveraging this package's Azure DevOps integration capabilities.
-
