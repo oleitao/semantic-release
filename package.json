@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint lib index.js",
+    "lint:fix": "eslint lib index.js --fix",
     "semantic-release": "semantic-release"
   },
   "repository": {

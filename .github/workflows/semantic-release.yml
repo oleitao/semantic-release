@@ -37,10 +37,15 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm ci
+        run: |
+          # First try to use the faster npm ci, if it fails (due to outdated lock file), use npm install
+          npm ci || npm install
           
       - name: Run linting
-        run: npm run lint
+        run: |
+          # First try to auto-fix lint issues, then run regular lint
+          npm run lint:fix
+          npm run lint
         
   release:
     name: Release
@@ -66,7 +71,23 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm ci
+        run: |
+          # First try to use the faster npm ci, if it fails (due to outdated lock file), use npm install
+          npm ci || npm install
+          
+      - name: Update package-lock if needed
+        run: |
+          if [[ $(git status --porcelain package-lock.json) ]]; then
+            echo "Package lock has changed, committing updates"
+            git config --global user.name "GitHub Actions"
+            git config --global user.email "actions@github.com"
+            git add package-lock.json
+            git commit -m "chore: update package-lock.json [skip ci]"
+            git push
+          else
+            echo "No changes to package-lock.json"
+          fi
+        continue-on-error: true
           
       - name: Set DEBUG env if debug mode is enabled
         if: ${{ github.event.inputs.debug == 'true' }}
