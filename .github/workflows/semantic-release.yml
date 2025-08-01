@@ -111,4 +111,12 @@ jobs:
           echo "Released version: $VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          
+          # Create summary output for workflow run
+          echo "## 🚀 Release Information" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** v$VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "**Release Date:** $(date +'%Y-%m-%d')" >> $GITHUB_STEP_SUMMARY
+          if [ -f "CHANGELOG.md" ]; then
+            echo "**Changelog:** See [CHANGELOG.md](../blob/master/CHANGELOG.md)" >> $GITHUB_STEP_SUMMARY
+          fi
         id: get_version
