@@ -212,6 +212,16 @@ You can manually trigger the release workflow from the GitHub Actions tab in you
 - **Permissions Management** - Explicitly configured for GitHub token scopes
 - **Version Output** - Makes the released version available to downstream workflows
 - **PR Validation** - Tests PRs without performing a release
+- **Package Lock Management** - Automatically fixes outdated package-lock.json files
+
+### Automatic Package Lock Handling
+
+The workflow is designed to handle outdated package-lock.json files automatically:
+
+1. It first tries to use the faster `npm ci` command
+2. If that fails due to an outdated lock file, it falls back to `npm install`
+3. If package-lock.json is updated, the workflow commits the changes back to the repository
+4. This ensures that the repository always has an up-to-date package-lock.json file
 
 For more details on semantic-release, check the [official documentation](https://semantic-release.gitbook.io/semantic-release/).
 
