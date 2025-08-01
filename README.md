@@ -319,6 +319,32 @@ You can manually trigger the release workflow from the GitHub Actions tab in you
 - **PR Validation** - Tests PRs without performing a release
 - **Package Lock Management** - Automatically fixes outdated package-lock.json files
 - **Git Tag Generation** - Automatically creates Git tags for released versions
+- **Semantic Versioning** - Analyzes commit messages to determine version bumps
+- **Automatic GitHub Releases** - Creates GitHub releases with changelogs
+- **Commit Analysis** - Provides statistics on features, fixes, and breaking changes
+
+### Automatic Version Bumping
+
+The workflow automatically determines the appropriate version bump based on commit messages:
+
+1. **Commit Analysis** - Before running semantic-release, the workflow analyzes commits since the last tag
+2. **Version Impact Prediction** - Provides a prediction of whether the release will be major, minor, or patch
+3. **Detailed Summary** - After release, generates a detailed summary with:
+   - Previous and new version numbers
+   - Type of version bump (MAJOR, MINOR, PATCH)
+   - Statistics on features, fixes, and breaking changes
+   - Links to changelog
+
+For projects using GitHub as their primary development platform, the workflow also:
+- Creates GitHub Releases automatically with release notes from the changelog
+- Adds a notification to the workflow summary about the version bump
+- Provides links to the full changelog and release notes
+
+This fully automated process ensures:
+- Version numbers always follow semantic versioning principles
+- Release notes are comprehensive and automatically generated
+- The development team is informed about the impact of their changes
+- All releases are properly documented and tagged
 
 ### Automatic Git Tag Generation
 
